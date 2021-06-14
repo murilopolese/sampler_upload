@@ -2,6 +2,7 @@ require('dotenv').config()
 const PORT = process.env.PORT || '8080'
 const express = require('express')
 const multer = require('multer')
+const cors = require('cors')
 const AWS = require('aws-sdk');
 const fs = require('fs');
 
@@ -47,6 +48,7 @@ function uploadToS3 (fileName, fileContent) {
 }
 
 const app = express()
+app.use(cors())
 
 function Form() {
   return `
