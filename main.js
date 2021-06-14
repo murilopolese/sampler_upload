@@ -59,23 +59,6 @@ function Form() {
   `
 }
 
-function Message(msg) {
-  return `
-    <p>${msg}</p>
-    ${Form()}
-  `
-}
-
-function Success(data) {
-  return `
-    <p>File uploaded successfully!</p>
-    ${Form()}
-    <a href="https://makeymakeysampler.herokuapp.com/#load/${data}" target="_blank">
-      Open on sampler app
-    </a>
-  `
-}
-
 app.get('/', (req, res) => {
   res.send('Try <a href="https://apps.makeymakey.com/sampler/">the sampler app</a>')
 })
@@ -87,7 +70,7 @@ app.get('/form', (req, res) => {
 app.post('/upload', upload.single('samplepack'), (req, res) => {
   // Read content from the file
   if (!req.file) {
-    res.send(Message('no file'))
+    res.json({ error: "Not a valid file" })
     return
   }
   const fileContent = fs.readFileSync(req.file.path)
@@ -96,11 +79,14 @@ app.post('/upload', upload.single('samplepack'), (req, res) => {
     .then((data) => {
       console.log(`File uploaded successfully. ${data.Location}`)
       fs.unlinkSync(req.file.path)
-      res.send(Success(req.file.filename))
+      res.json({
+        message: "File uploaded successfully.",
+        data: req.file.filename
+      })
     })
     .catch((e) => {
       console.log('error', e)
-      res.send('error')
+      res.json({ error: "Unexpected error", data: e })
     })
 })
 
