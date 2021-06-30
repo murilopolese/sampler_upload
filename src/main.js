@@ -1,5 +1,6 @@
 require('dotenv').config()
 const PORT = process.env.PORT || '8080'
+const PORT_SSL = process.env.PORT_SSL || '443'
 const express = require('express')
 const multer = require('multer')
 const cors = require('cors')
@@ -91,5 +92,8 @@ app.post('/upload', upload.single('samplepack'), (req, res) => {
 })
 
 app.listen(PORT, (e) => {
-  console.log(`Listening to http://localhost:${PORT}`)
+  console.log(`Listening to localhost:${PORT}`)
+})
+app.listen(PORT_SSL, (e) => {
+  console.log(`Listening to localhost:${PORT_SSL}`)
 })
