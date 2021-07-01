@@ -31,5 +31,5 @@ docker run \
 -e ACCESS_KEY=123 \
 -e SECRET=321 \
 -e BUCKET_NAME=bucketname \
-murilopolese/sampler_upload:1.0.0
+murilopolese/sampler_upload:1.1.0
 ```
