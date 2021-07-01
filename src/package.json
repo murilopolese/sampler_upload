@@ -1,7 +1,7 @@
 {
-  "name": "sampler_upload",
-  "version": "1.0.0",
-  "description": "",
+  "name": "s3_upload",
+  "version": "1.1.0",
+  "description": "Uploads files to S3 buckets",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"

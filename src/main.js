@@ -54,7 +54,7 @@ app.use(cors())
 function Form() {
   return `
     <form method="POST" action="/upload" enctype="multipart/form-data">
-      <input type="file" name="samplepack" accept=".zip" />
+      <input type="file" name="file_input" accept=".zip" />
       <input type="submit" />
     </form>
   `
@@ -68,7 +68,7 @@ app.get('/form', (req, res) => {
   res.send(Form())
 })
 
-app.post('/upload', upload.single('samplepack'), (req, res) => {
+app.post('/upload', upload.single('file_input'), (req, res) => {
   // Read content from the file
   if (!req.file) {
     res.json({ error: "Not a valid file" })
